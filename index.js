@@ -9,7 +9,9 @@ import admissions from "./src/routes/admissions.js";
 import users from "./src/routes/users.js";
 
 mongoose
-	.connect("mongodb://localhost/dada-clinic-db")
+	.connect(
+		"mongodb+srv://mykobacal23:mykobacal23@cluster0.e46oelg.mongodb.net/?retryWrites=true&w=majority"
+	)
 	.then(() => console.log("Connected to MongoDB..."))
 	.catch((err) => console.error("Could not connect to MongoDB..."));
 
