@@ -39,13 +39,17 @@ router.post("/login", async (req, res) => {
 		const errors = result.error.details.map((i) => i.message);
 		return res.status(404).send(errors);
 	}
-
 	try {
-		const newUser = await User.findOne({ email: req.body.email });
-		const login = await bcrypt.compare(req.body.password, newUser.password);
+		const allUsers = await User.find();
+		console.log("allUsers==========", allUsers);
+		const newUser = await User.find({ email: req.body.email });
+		const login = await bcrypt.compare(
+			req.body.password,
+			newUser[0].password
+		);
 
 		const userToken = jwt.sign(
-			_.pick(newUser, ["username", "title", "name", "email", "_id"]),
+			_.pick(newUser[0], ["username", "title", "name", "email", "_id"]),
 			"privatekey"
 		);
 
